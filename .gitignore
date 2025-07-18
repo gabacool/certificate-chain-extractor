@@ -1,0 +1,35 @@
+# Output directories
+certificates/
+output/
+*.pem
+*.crt
+*.cer
+
+# Generated installation guides
+mac_installation_guide.md
+
+# Windows temp files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Test certificates (don't commit actual certificates)
+test_certificates/
+sample_output/
