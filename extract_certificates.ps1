@@ -184,13 +184,15 @@ function Generate-MacInstallationGuide {
 "@
 
     foreach ($cert in $Certificates) {
-        $guide += @"
+        if ($cert.Type -and $cert.Filename) {
+            $guide += @"
 
 ### $($cert.Type) - $($cert.Filename)
 - **Subject**: $($cert.Subject)
 - **Issuer**: $($cert.Issuer)
 - **Install on Mac**: $($cert.InstallOnMac)
 "@
+        }
     }
 
     $guide += @"
@@ -282,6 +284,7 @@ Server Certificate ($ServerUrl)
 └── Certificate chain valid ✅
 ```
 "@
+"@
 
     $guideFile = "$OutputPath\mac_installation_guide.md"
     [System.IO.File]::WriteAllText($guideFile, $guide)
@@ -327,10 +330,13 @@ try {
     $hostname = Extract-Hostname -Url $ServerUrl
     Write-Host "Target server: $hostname" -ForegroundColor White
     
-    # Create output directory
+    # Create output directory and resolve to absolute path
     if (!(Test-Path $OutputDir)) {
-        New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+        $dir = New-Item -ItemType Directory -Path $OutputDir -Force
+        $OutputDir = $dir.FullName
         Write-Host "Created output directory: $OutputDir" -ForegroundColor Green
+    } else {
+        $OutputDir = (Resolve-Path $OutputDir).Path
     }
     
     # Test connection
