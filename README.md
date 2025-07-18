@@ -46,7 +46,7 @@ certificates/
 
 ### Enterprise & Corporate
 - Internal company websites with private Certificate Authorities
-- Corporate applications (GitLab, Jenkins, SAS, etc.)
+- Corporate applications (GitLab, Jenkins, etc.)
 - Development and staging environments
 - BYOD (Bring Your Own Device) setup for employee personal Macs
 
